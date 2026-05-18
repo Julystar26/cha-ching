@@ -2,38 +2,829 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Photo Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JulyStar - Chandler, AZ Photographer</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5;}
-    header { background: #333; padding: 1rem; color: #fff; text-align: center;}
-    nav { text-align: center; margin: 1rem 0;}
-    nav a { margin: 0 10px; color: #333; text-decoration: none; font-weight: bold;}
-    nav a:hover { color: #6600cc;}
-    main { max-width: 600px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 8px; }
-    footer { text-align: center; color: #999; font-size: .9rem; margin-top: 2rem; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Header & Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .logo span {
+      color: #c9a961;
+      margin-left: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .tagline {
+      font-size: 0.7rem;
+      color: #999;
+      font-weight: normal;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #c9a961;
+    }
+
+    .book-btn {
+      background: #c9a961;
+      color: #fff !important;
+      padding: 0.7rem 1.5rem;
+      border-radius: 3px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .book-btn:hover {
+      background: #b8985a;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://via.placeholder.com/1200x600');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      padding: 4rem 2rem;
+      min-height: 500px;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-content .subtitle {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #ddd;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .hero-location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .hero-location::before {
+      content: "❤️";
+      font-size: 1rem;
+    }
+
+    .hero-cta {
+      background: #c9a961;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border-radius: 3px;
+      transition: background 0.3s;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .hero-cta:hover {
+      background: #b8985a;
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+    }
+
+    /* Feature Cards */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 3rem 2rem;
+      background: #f9f9f9;
+    }
+
+    .feature-card {
+      background: #fff;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid #eee;
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .feature-card p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      padding: 3rem 2rem;
+      background: #fff;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .gallery-item {
+      text-align: center;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .gallery-item p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .gallery-btn {
+      display: inline-block;
+      border: 2px solid #c9a961;
+      color: #c9a961;
+      padding: 0.6rem 2rem;
+      background: transparent;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .gallery-btn:hover {
+      background: #c9a961;
+      color: #fff;
+    }
+
+    @media (max-width: 1024px) {
+      .gallery {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* About Section */
+    .about-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 3rem 2rem;
+      background: #f9f9f9;
+      align-items: center;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .about-content h2 {
+      font-size: 0.8rem;
+      color: #c9a961;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-content h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .about-values {
+      margin-bottom: 1.5rem;
+    }
+
+    .value-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .value-icon {
+      font-size: 1.5rem;
+      color: #c9a961;
+      min-width: 30px;
+    }
+
+    .value-item h3 {
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+    }
+
+    .value-item p {
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    .about-btn {
+      background: #c9a961;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border-radius: 3px;
+      transition: background 0.3s;
+    }
+
+    .about-btn:hover {
+      background: #b8985a;
+    }
+
+    @media (max-width: 768px) {
+      .about-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 3rem 2rem;
+      background: #fff;
+    }
+
+    .services-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .service-card {
+      background: #f9f9f9;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid #eee;
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .service-price {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .services-sidebar {
+      background: #f9f9f9;
+      padding: 2rem;
+      border: 1px solid #eee;
+      text-align: center;
+    }
+
+    .services-sidebar h3 {
+      font-size: 0.8rem;
+      color: #c9a961;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .services-sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .services-sidebar ul {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .services-sidebar li {
+      margin-bottom: 0.7rem;
+      color: #666;
+    }
+
+    .services-sidebar li::before {
+      content: "✓ ";
+      color: #c9a961;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    .services-sidebar button {
+      background: #c9a961;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      border-radius: 3px;
+      transition: background 0.3s;
+    }
+
+    .services-sidebar button:hover {
+      background: #b8985a;
+    }
+
+    @media (max-width: 1024px) {
+      .services-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Adoption Project Section */
+    .adoption-section {
+      padding: 3rem 2rem;
+      background: #f9f9f9;
+    }
+
+    .adoption-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .adoption-header h3 {
+      font-size: 0.8rem;
+      color: #c9a961;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .adoption-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .adoption-header p {
+      font-style: italic;
+      color: #999;
+      margin-bottom: 1rem;
+    }
+
+    .adoption-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .adoption-images {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .adoption-images img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .adoption-images .label {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .adoption-text p {
+      color: #666;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .adoption-btn {
+      background: #c9a961;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border-radius: 3px;
+      transition: background 0.3s;
+    }
+
+    .adoption-btn:hover {
+      background: #b8985a;
+    }
+
+    @media (max-width: 768px) {
+      .adoption-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: #2a2a2a;
+      color: #ccc;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    footer h4 {
+      color: #fff;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: #aaa;
+    }
+
+    .footer-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-contact {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .footer-contact-info {
+      font-size: 0.85rem;
+    }
+
+    .footer-tagline {
+      font-style: italic;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      footer {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Utility */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    button {
+      font-family: inherit;
+    }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <h1>The Photo Studio</h1>
-    <p>Portraits | Food | Events | Family | Spirituality</p>
+    <div class="logo">
+      JulyStar
+      <span>✦</span>
+      <div class="tagline">Chandler, AZ Photographer</div>
+    </div>
+    <nav>
+      <a href="#gallery">GALLERY</a>
+      <a href="#about">ABOUT</a>
+      <a href="#sessions">SESSIONS</a>
+      <a href="#adoption">ADOPTION PROJECT</a>
+      <a href="#contact">CONTACT</a>
+      <a href="#book" class="book-btn">BOOK NOW</a>
+    </nav>
   </header>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Portraits</a>
-    <a href="#">Food</a>
-    <a href="#">Events</a>
-    <a href="#">Family</a>
-    <a href="#">Spirituality</a>
-    <a href="#">Book Now</a>
-  </nav>
-  <main>
-    <h2>Welcome to The Photo Studio!</h2>
-    <p>We capture moments—portraits, food, events, family, and spirituality—inspired by your story. Explore our services or <a href="#">book your session now</a>.</p>
-  </main>
-  <footer>
-    &copy; 2026 The Photo Studio
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Chandler, AZ</h1>
+      <p class="subtitle">Photographer</p>
+      <p>Real moments. Real people.<br>Beautifully captured.</p>
+      <div class="hero-location">SERVING CHANDLER, GILBERT, MESA & THE EAST VALLEY</div>
+      <button class="hero-cta">BOOK YOUR CHANDLER SESSION</button>
+    </div>
+    <div class="hero-image">
+      <img src="https://via.placeholder.com/400x500" alt="Photographer">
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <h3>Same-Week Availability</h3>
+      <p>Flexible scheduling for busy lives</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📍</div>
+      <h3>On-Location or In-Home</h3>
+      <p>Your story, your space</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌸</div>
+      <h3>Serving the East Valley</h3>
+      <p>Chandler, Gilbert, Mesa, Tempe & more</p>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section" id="gallery">
+    <h2 class="section-title">Capturing Life's Beautiful Moments</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="https://via.placeholder.com/200x250" alt="Chandler Portraits">
+        <p>CHANDLER PORTRAITS</p>
+      </div>
+      <div class="gallery-item">
+        <img src="https://via.placeholder.com/200x250" alt="Family Sessions">
+        <p>FAMILY SESSIONS</p>
+      </div>
+      <div class="gallery-item">
+        <img src="https://via.placeholder.com/200x250" alt="Lifestyle Moments">
+        <p>LIFESTYLE MOMENTS</p>
+      </div>
+      <div class="gallery-item">
+        <img src="https://via.placeholder.com/200x250" alt="Food Photography">
+        <p>FOOD PHOTOGRAPHY</p>
+      </div>
+      <div class="gallery-item">
+        <img src="https://via.placeholder.com/200x250" alt="Pet Photography">
+        <p>PET PHOTOGRAPHY</p>
+      </div>
+    </div>
+    <div style="text-align: center;">
+      <button class="gallery-btn">VIEW FULL GALLERY</button>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <div class="about-image">
+      <img src="https://via.placeholder.com/400x400" alt="About the studio">
+    </div>
+    <div class="about-content">
+      <h2>Hi, I'm July</h2>
+      <h1>I AM THE STUDIO.</h1>
+      <p>I see the beauty in the ordinary. I'm a Chandler, AZ photographer who believes in real connection and honest moments. Whether it's your family, your brand, or your furry best friend—I'm here to tell your story with heart and intention.</p>
+      
+      <div class="about-values">
+        <div class="value-item">
+          <div class="value-icon">📷</div>
+          <div>
+            <h3>Real Moments</h3>
+            <p>Captured with heart</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">❤️</div>
+          <div>
+            <h3>Meaningful Connections</h3>
+            <p>It's more than just a photo</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">⭐</div>
+          <div>
+            <h3>Your Story Matters</h3>
+            <p>Authentic. Natural. You.</p>
+          </div>
+        </div>
+      </div>
+      
+      <button class="about-btn">MORE ABOUT ME</button>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section" id="sessions">
+    <h2 class="section-title">What I Offer</h2>
+    <div style="display: grid; grid-template-columns: 4fr 1fr; gap: 2rem; align-items: start;">
+      <div class="services-container">
+        <div class="service-card">
+          <div class="service-icon">📷</div>
+          <h3>Portrait Sessions</h3>
+          <p>For individuals, couples, seniors & more.</p>
+          <div class="service-price">Starting at $250</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👨‍👩‍👧‍👦</div>
+          <h3>Family Sessions</h3>
+          <p>Natural, joyful photos of the people you love most.</p>
+          <div class="service-price">Starting at $350</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💼</div>
+          <h3>Branding Sessions</h3>
+          <p>Elevate your brand with images that connect.</p>
+          <div class="service-price">Starting at $350</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🐾</div>
+          <h3>Pet Sessions</h3>
+          <p>Celebrate your pets with beautiful portraits.</p>
+          <div class="service-price">Starting at $200</div>
+        </div>
+      </div>
+      
+      <div class="services-sidebar">
+        <h3>Let's work together!</h3>
+        <h2>BOOK YOUR CHANDLER SESSION</h2>
+        <ul>
+          <li>Easy online booking</li>
+          <li>Quick response</li>
+          <li>Personalized experience</li>
+        </ul>
+        <button>CHECK AVAILABILITY</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Adoption Project Section -->
+  <section class="adoption-section" id="adoption">
+    <div class="adoption-header" style="grid-column: 1 / -1;">
+      <h3>Adoption Project</h3>
+      <h2>Helping Animals Get Adopted<br>Through Photography ❤️</h2>
+    </div>
+    <div class="adoption-content" style="grid-column: 1 / -1;">
+      <div class="adoption-images">
+        <div style="position: relative;">
+          <img src="https://via.placeholder.com/150x150" alt="Before adoption">
+          <div class="label">BEFORE</div>
+        </div>
+        <div style="position: relative;">
+          <img src="https://via.placeholder.com/150x150" alt="After adoption">
+          <div class="label">AFTER</div>
+        </div>
+        <div style="position: relative;">
+          <img src="https://via.placeholder.com/150x150" alt="After adoption">
+          <div class="label">AFTER</div>
+        </div>
+      </div>
+      <div class="adoption-text">
+        <p>I partner with local rescues to help pets get seen, loved, and adopted. Together, we can make a difference.</p>
+        <button class="adoption-btn">LEARN MORE / GET INVOLVED</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-section">
+      <h4>JulyStar</h4>
+      <p>Chandler, AZ Photographer</p>
+      <p class="footer-tagline">Grateful for every story I get to capture</p>
+    </div>
+    <div class="footer-section">
+      <h4>SERVING THE EAST VALLEY</h4>
+      <p>Chandler • Gilbert • Mesa • Tempe and surrounding areas</p>
+    </div>
+    <div class="footer-section">
+      <h4>GET IN TOUCH</h4>
+      <div class="footer-contact">
+        <span>📧</span>
+        <div class="footer-contact-info">hello@julystarstudio.com</div>
+      </div>
+      <div class="footer-contact">
+        <span>📞</span>
+        <div class="footer-contact-info">(480) 123-4567</div>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
